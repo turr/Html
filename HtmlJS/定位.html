@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!-- 相对定位relative -->
+		<div>
+			<div class="relative-a">
+				a
+			</div>
+			<div class="relative-b">
+				b
+			</div>
+			<div class="relative-c">
+				c
+			</div>
+			
+		</div>
+		<!-- 绝对定位fixed -->
+		<div>
+			<div class="fixed">
+			fixed
+			</div>
+		</div>
+		<!-- 相对定位absolute -->
+		<div>
+			<div class="absolute_main">
+					<div class="absolute_div"></div>
+			</div>
+		</div>
+
+
+	</body>
+</html>
+<!--
+relative
+absolute
+fixed
+absolute是相对外层的relativ,外层没有relative的时候，直接相对于body
+fixed是相对于屏幕,不够高度影响,例如一个可以滑动的页面,用fixed固定在底部。怎么滑动都在底部,用absolute固定底部。。一滑动可能就没了
+-->
+
+<style type="text/css">
+	
+.relative-a {
+  width: 500px;
+  background-color: red;
+   position: relative;
+}
+.relative-b {
+ width: 500px;
+  background-color: blue;
+   position: relative;
+   left: 100px;
+}
+.relative-c {
+ width: 500px;
+  background-color: cornflowerblue;
+   position: relative;
+   left: 20px;
+
+}
+
+.fixed{
+	position: fixed;
+
+   right: 0px;	
+  width: 200px;
+  background-color: yellow;
+}
+
+
+.absolute_main
+{
+	position: relative;
+  width: 600px;
+  height: 400px;
+  background-color: orange;
+}
+.absolute_div
+{
+	 width: 100px;
+  height: 100px;
+  background-color: lightcoral;
+	position :absolute;
+	right: 0;
+}
+
+</style>

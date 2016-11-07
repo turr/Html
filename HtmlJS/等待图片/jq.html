@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+
+<script src="jquery-2.1.4.min.js"></script>
+<script>
+	var s = [];
+	s[0] = 'http://img.bbs.wisenjoy.com/forum/201502/06/110130nduckf1tdddcuoeq.jpg';
+	s[1] = 'http://img.bbs.wisenjoy.com/forum/201502/06/110132lps212w1uwdf5jw9.jpg';
+	s[2] = 'http://img.bbs.wisenjoy.com/forum/201502/06/110128elba7bvvtbazeadt.jpg';
+	s[3] = 'http://img.bbs.wisenjoy.com/forum/201408/25/204709fbob6dbnultb4pmw.jpg';
+	s[4] = 'http://img.bbs.wisenjoy.com/forum/201408/25/204708qbegwwu5qwz7p0ke.jpg';
+	s[5] = 'http://img.bbs.wisenjoy.com/forum/201408/25/204707xdvekmpcmpgvmy4d.jpg';
+	s[6] = 'http://img.bbs.wisenjoy.com/forum/201408/25/204706h2z9vngbkg2uanzj.jpg';
+	s[7] = 'http://img.bbs.wisenjoy.com/forum/201408/25/204703e33bzm4s14smuuf1.jpg';
+	s[8] = 'http://img.bbs.wisenjoy.com/forum/201408/25/204702g9g63f3qguuingzg.jpg';
+	s[9] = 'http://img.bbs.wisenjoy.com/forum/201408/25/204701i57hxc7y7275ha8k.jpg';
+	s[10] = 'http://img.bbs.wisenjoy.com/forum/201408/25/204705qrulx1azi131z1o6.jpg';
+
+	var imgs = [];
+	var result = []
+	$(s).each(function(i, n) {
+		var one_img = new Image();
+		imgs[i] = one_img;
+		one_img.src = n;
+		if(one_img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数     
+			result[i] = n;
+		} else {
+			one_img.onload = function() { //图片下载完毕时异步调用callback函数。         
+				result[i] = n;
+			};
+			one_img.onerror = function() { //图片下载完毕时异步调用callback函数。         
+				result[i] = "error";
+				one_img.complete = true;
+			};
+		}
+	});
+
+	var t_img; // 定时器
+	var isLoad = true; // 控制变量
+	// 判断图片加载状况，加载完成后回调
+	isImgLoad(function() {
+		console.info(result);
+	});
+	// 判断图片加载的函数
+	function isImgLoad(callback) {
+		$.each(imgs, function() {
+			// 找到为complete为false则继续判断
+			if(this.complete == false) {
+				isLoad = false;
+				return false;
+			}
+		});
+		// 为true，没有发现为0的。加载完毕
+		if(isLoad) {
+			clearTimeout(t_img); // 清除定时器
+			// 回调函数
+			callback();
+			// 为false，因为找到了没有加载完成的图，将调用定时器递归
+		} else {
+			isLoad = true;
+			t_img = setTimeout(function() {
+				isImgLoad(callback); // 递归扫描
+			}, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+		}
+	}
+</script>
