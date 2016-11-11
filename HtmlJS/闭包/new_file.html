@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>闭包</title>
+	</head>
+
+	<body>
+		<p>Javascript语言的特殊之处，就在于函数内部可以直接读取全局变量。</p>
+		<p>函数内部声明变量的时候，一定要使用var命令。如果不用的话，你实际上声明了一个全局变量！</p>
+		<p>上一节代码中的f2函数，就是闭包。<br/> 各种专业文献上的“闭包”（closure）定义非常抽象，很难看懂。我的理解是，闭包就是能够读取其他函数内部变量的函数。<br/> 由于在Javascript语言中，只有函数内部的子函数才能读取局部变量，因此可以把闭包简单理解成“定义在一个函数内部的函数”。<br/> 所以，在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。
+		</p>
+		<p>闭包可以用在许多地方。它的最大用处有两个，<span style="color:red">一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。</span></p>
+	</body>
+
+</html>
+<script>
+	function f1() {　　
+		n = 1;　　
+		function f2() {　　　　
+			console.info(n);　　
+		}　　
+		return f2;
+	}
+	var result = f1(); //f1返回f2函数,所以result则是f2函数
+	result(); //调用f2函数,输出全局变量n
+	n = 2;
+	result();
+
+	//------------------------------
+
+	function f3() {　　　　
+		var m = 999;　　　　
+		nAdd = function() {
+				m += 1
+			} //全局
+			　　　　
+		function f4() {　　　　　　
+			console.info(m);　　　　　　
+		}　　　　
+		return f4;　　
+	}
+	var result2 = f3();
+	result2();
+	nAdd();
+	result2();
+	//result2实际上就是闭包f4函数。它一共运行了两次，第一次的值是999，第二次的值是1000。
+	//这证明了，函数f3中的局部变量m一直保存在内存中，并没有在f3调用后被自动清除。
+	//原因就在于f3是f4的父函数，而f4被赋给了一个全局变量，这导致f4始终在内存中，而f4的存在依赖于f3，因此f3也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。
+
+	//------------------------------
+	var name = "The Window";　　
+	var object = {　　　　
+		name: "My Object",
+		　　　　getNameFunc: function() {　　　　　　
+			return function() {　　　　　　　　
+				return this.name;　　　　　　 //this指向windows
+			};　　　　
+		}　　
+	};　　
+	console.info(object.getNameFunc()());　　
+	　　　
+	var object2 = {　　　　
+		name: "My Object",
+		　　　　getNameFunc: function() {　　　　　　
+			var that = this;　　　　　　//this指向object2
+			return function() {　　　　　　　　
+				return that.name;　　　　　　
+			};　　　　
+		}　　
+	};
+	console.info(object2.getNameFunc()());
+</script>
