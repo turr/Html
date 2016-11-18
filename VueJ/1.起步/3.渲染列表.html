@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="test_div">
+			<p v-for="todo in todos">
+				{{ todo.text }}
+			</p>
+		</div>
+
+	</body>
+</html>
+
+<script>
+	
+new Vue({
+  el: '#test_div',
+  data: {
+    todos: [
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue.js' },
+      { text: 'Build Something Awesome' }
+    ]
+  }
+})
+</script>

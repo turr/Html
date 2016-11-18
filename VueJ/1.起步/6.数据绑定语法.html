@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- 指令 -->
+		<p v-if="show_hellow">你好!</p>
+		<!-- 文本 -->
+		<p>{{ message }}</p>
+		<p>{{* message2 }}</p>
+		<!-- 原始HTML -->
+		<p>{{{ message3 }}}  {{ message3 }}</p>
+		<!-- JS 表达式 -->
+		<p>{{ id * 2}}</p>
+		<!-- 过滤器 -->
+		<p>{{ message4 | capitalize }}</p>
+		<!-- HTML特性 -->
+		<p id="p_{{id}}">属性上用Mustache 标签</p>
+		
+		<!-- 参数-->
+		<a v-bind:href="url">baidu</a>
+		<button v-on:click="hello" >alert hello</button>
+		<br />
+		<!-- 缩写-->
+		<a :href="url">baidu2</a>
+		<button @click="hello" >alert hello2</button>
+	</body>
+
+</html>
+
+<script>
+	//可在控制台修改mydata里的数据,显示不同的效果,响应式数据绑定
+	var mydata = {
+		show_hellow: true,
+		message: "双向绑定",
+		message2: "单次插值",
+		message3: "<span style='color:red'>红色</span>",
+		message4: "abc",
+		id : 10086,
+		url : "http://www.baidu.com"
+		
+	};
+	var vm = new Vue({
+		el: 'body',
+		data: mydata,
+		methods: {
+			hello: function() {
+				alert('hello');
+			}
+		}
+	});
+	// 这个回调将在 `vm.message`  改变后调用
+	vm.$watch('message', function(newVal, oldVal) {
+
+		console.info("新值:" + newVal);
+		console.info("旧值:" + oldVal);
+	});
+</script>

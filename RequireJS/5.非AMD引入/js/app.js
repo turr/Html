@@ -1,14 +1,14 @@
 require.config({
 	paths: {
 		"jquery": "jquery-2.1.4.min",
-//		"jquery": "jquery-1.3.2.min",
+		//		"jquery": "jquery-1.3.2.min",
 		"a": "a",
 		"b": "b"
 	},
 	shim: {
-//		"jquery": {
-//			exports: "$"
-//		},
+		//		"jquery": {
+		//			exports: "$"
+		//		},
 		"a": {
 			deps: ["jquery"], //依赖于jquery
 			init: function() { //定义方法
@@ -37,8 +37,6 @@ require(["jquery"], function($) {
 	} else {
 		$("p[name='c2']").text("jQuery低於1.7需要配置shim");
 	}
-	
-	
 
 })
 
@@ -50,7 +48,4 @@ require(["a"], function(A_Call) {
 require(["b"], function(B_Call) {
 	$("p[name='c5']").text(B_Call.hello1());
 	B_Call.b_click();
-	
-  
-	
 })

@@ -3,8 +3,7 @@ require.config({
         "jquery" :["http://code.jquery.com/jquery-2.1.4.min","jquery-2.1.4.min"],
         "a"  : "a",
         "b"  : "b",
-        "c"  : "c",
-        "e"  : "e"
+        "c"  : "c"
 
     },
     shim: {
@@ -15,15 +14,12 @@ require.config({
 		          hello2: hello2
 		        }
 		    }
-	    },
-	    e:{
-	    	exports : "_"
 	    }
 	}
 });
-//require(["jquery"],function(jq){
-//	$("#input1").val("初始JQ加载成功");
-//});
+require(["jquery"],function(jq){
+	$("#input1").val("初始JQ加载成功");
+});
 //require(["a","b"],function(module_a,module_b){
 //  alert(module_b.add(1,1));	  
 //  alert(module_b.jian(10,1));	  
@@ -46,13 +42,8 @@ require.config({
 //	module_c.hello1();
 //	module_c.hello2();
 //});
-//
-//require(["d"],function(module_d){
-//	module_d.change();
-//	module_d.b_click();
-//});
 
-require(["e"], function(_){
-	alert(_);
-
-})
+require(["d"],function(module_d){
+	module_d.change();
+	module_d.b_click();
+});
