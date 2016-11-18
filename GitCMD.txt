@@ -1,4 +1,4 @@
-安装完git后需要设置(配置文件存在于C:\Users\kturr\.gitconfig)
+﻿安装完git后需要设置(配置文件存在于C:\Users\kturr\.gitconfig)
 git config --global user.name "账号"
 git config --global user.email "邮箱"
 
@@ -80,4 +80,4 @@ git push 远程库(origin :refs/tags/已删除标签		已经推送到远程的�
 
 
 ---------------------- 忽略文件
-touch .gitignore					windows下建文件
+touch .gitignore					windows下建文件 
